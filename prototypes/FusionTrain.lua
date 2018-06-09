@@ -1,6 +1,6 @@
 local f_loc = table.deepcopy(data.raw['locomotive']['locomotive'])
-f_loc.name = "fusion-locomotive"
-f_loc.minable.result = "fusion-locomotive"
+f_loc.name = "fusion-locomotive-mk1"
+f_loc.minable.result = "fusion-locomotive-mk1"
 f_loc.max_speed = 1.2 * 1.15
 f_loc.max_power = 600 *1.8 .. "kW"
 f_loc.burner.fuel_inventory_size = 0
@@ -33,88 +33,62 @@ f_loc3.air_resistance = 0.00375
 data:extend({f_loc,f_loc2,f_loc3})
 
 
-data:extend(
-{
-	{
-		type = "item-with-entity-data",
-		name = "fusion-locomotive",
-		icon = "__base__/graphics/icons/diesel-locomotive.png",
-		flags = {"goes-to-quickbar"},
-		subgroup = "transport",
-		order = "a[train-system]-f[diesel-locomotive]-a[fusion-locomotive]",
-		place_result = "fusion-locomotive",
-		stack_size = 5
-	},
-	{
-		type = "item-with-entity-data",
-		name = "fusion-locomotive-mk2",
-		icon = "__base__/graphics/icons/diesel-locomotive.png",
-		flags = {"goes-to-quickbar"},
-		subgroup = "transport",
-		order = "a[train-system]-f[diesel-locomotive]-b[fusion-locomotive-mk2]",
-		place_result = "fusion-locomotive-mk2",
-		stack_size = 5
-	},
-	{
-		type = "item-with-entity-data",
-		name = "fusion-locomotive-mk3",
-		icon = "__base__/graphics/icons/diesel-locomotive.png",
-		flags = {"goes-to-quickbar"},
-		subgroup = "transport",
-		order = "a[train-system]-f[diesel-locomotive]-c[fusion-locomotive-mk3]",
-		place_result = "fusion-locomotive-mk3",
-		stack_size = 5
-	},	
-})
+local floc = table.deepcopy(data.raw['item-with-entity-data']['locomotive'])
+floc.name = "fusion-locomotive-mk1"
+floc.order = "a[train-system]-f[diesel-locomotive]-a[fusion-train]-a[fusion-locomotive-mk1]"
+floc.place_result = "fusion-locomotive-mk1"
+
+local floc2 = table.deepcopy(data.raw['item-with-entity-data']['locomotive'])
+floc2.name = "fusion-locomotive-mk2"
+floc2.order = "a[train-system]-f[diesel-locomotive]-a[fusion-train]-b[fusion-locomotive-mk2]"
+floc2.place_result = "fusion-locomotive-mk2"
+
+local floc3 = table.deepcopy(data.raw['item-with-entity-data']['locomotive'])
+floc3.name = "fusion-locomotive-mk3"
+floc3.order = "a[train-system]-f[diesel-locomotive]-a[fusion-train]-c[fusion-locomotive-mk3]"
+floc3.place_result = "fusion-locomotive-mk3"
 
 
-data:extend(
-{
+data:extend({floc,floc2,floc3})
+
+
+local eloc = table.deepcopy(data.raw['recipe']['locomotive'])
+eloc.name = "fusion-locomotive-mk1"
+eloc.ingredients =
 	{
-		type = "recipe",
-		name = "fusion-locomotive",
-		enabled = false,
-		ingredients =
-		{
-			{"locomotive", 1},
-			{"nuclear-reactor", 1},
-			{"electric-engine-unit", 20},
-			{"uranium-fuel-cell", 10}
-		},
-		result = "fusion-locomotive"
-	},
-})
-	
+		{"locomotive", 1},
+		{"nuclear-reactor", 1},
+		{"electric-engine-unit", 20},
+		{"uranium-fuel-cell", 10}	
+	}
+eloc.result = "fusion-locomotive-mk1"
+
+local eloc2 = table.deepcopy(data.raw['recipe']['locomotive'])
+eloc2.name = "fusion-locomotive-mk2"
+eloc2.ingredients =
+	{
+		{"fusion-locomotive-mk1", 1},
+		{"nuclear-reactor", 1},
+		{"electric-engine-unit", 20},
+		{"uranium-fuel-cell", 10}
+	}
+eloc2.result = "fusion-locomotive-mk2"
+
+local eloc3 = table.deepcopy(data.raw['recipe']['locomotive'])
+eloc3.name = "fusion-locomotive-mk3"
+eloc3.ingredients =
+	{
+		{"fusion-locomotive-mk2", 1},
+		{"nuclear-reactor", 1},
+		{"electric-engine-unit", 20},
+		{"uranium-fuel-cell", 10}
+	}
+eloc3.result = "fusion-locomotive-mk3"
+
+
+data:extend({eloc})
 function train_rec()
-	data:extend(
-	{	
-		{
-			type = "recipe",
-			name = "fusion-locomotive-mk2",
-			enabled = false,
-			ingredients =
-			{
-				{"fusion-locomotive", 1},
-				{"nuclear-reactor", 1},
-				{"electric-engine-unit", 20},
-				{"uranium-fuel-cell", 10}
-			},
-			result = "fusion-locomotive-mk2"
-		},
-		{
-			type = "recipe",
-			name = "fusion-locomotive-mk3",
-			enabled = false,
-			ingredients =
-			{
-				{"fusion-locomotive-mk2", 1},
-				{"nuclear-reactor", 1},
-				{"electric-engine-unit", 20},
-				{"uranium-fuel-cell", 10}
-			},
-			result = "fusion-locomotive-mk3"
-		}
-	})
+	data:extend({eloc2,eloc3})
 end
 
 
@@ -129,7 +103,7 @@ data:extend(
 		{
 			{
 				type = "unlock-recipe",
-				recipe = "fusion-locomotive"
+				recipe = "fusion-locomotive-mk1"
 			}		
 		},
 		prerequisites = {"railway", "electric-engine", "nuclear-power"},

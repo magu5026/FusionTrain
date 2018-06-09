@@ -1,9 +1,9 @@
 data:extend({
 	{
 		type = "bool-setting",
-		name = "mk-train",
+		name = "fusion-mk-train",
 		setting_type = "startup",
-		default_value = "false",
+		default_value = "true",
 	},
 	{
 		type = "bool-setting",
