@@ -1,9 +1,9 @@
 {
 	"name":"FusionTrain",
 	"author":"magu5026",
-	"version":"0.17.2",
+	"version":"0.17.3",
 	"title":"Fusion Train",
 	"description":"Adds trains that do not require fuel to the game.",
 	"factorio_version":"0.17",
-	"dependencies": ["base >= 0.17.9"]
+	"dependencies": ["base >= 0.17.21"]
 }

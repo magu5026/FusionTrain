@@ -1,0 +1,20 @@
+{
+  "entity":
+  [
+	["fusion-locomotive-mk1", "fusion-locomotive-1"],
+	["fusion-locomotive-mk2", "fusion-locomotive-2"],
+	["fusion-locomotive-mk3", "fusion-locomotive-3"]
+  ],
+  "item":
+  [
+	["fusion-locomotive-mk1", "fusion-locomotive-1"],
+	["fusion-locomotive-mk2", "fusion-locomotive-2"],
+	["fusion-locomotive-mk3", "fusion-locomotive-3"]
+  ],
+  "recipe":
+  [
+	["fusion-locomotive-mk1", "fusion-locomotive-1"],
+	["fusion-locomotive-mk2", "fusion-locomotive-2"],
+	["fusion-locomotive-mk3", "fusion-locomotive-3"]
+  ]
+}

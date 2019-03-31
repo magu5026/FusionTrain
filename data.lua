@@ -1,92 +1,95 @@
-local f_loc = table.deepcopy(data.raw['locomotive']['locomotive'])
-f_loc.name = "fusion-locomotive-mk1"
-f_loc.minable.result = "fusion-locomotive-mk1"
-f_loc.burner.fuel_inventory_size = 0
+local locomotive_1_entity = table.deepcopy(data.raw['locomotive']['locomotive'])
+locomotive_1_entity.name = "fusion-locomotive-1"
+locomotive_1_entity.minable.result = "fusion-locomotive-1"
+locomotive_1_entity.burner = nil
+locomotive_1_entity.energy_source = {type = "void"}
 				
-local f_loc2 = table.deepcopy(data.raw['locomotive']['locomotive'])
-f_loc2.name = "fusion-locomotive-mk2"
-f_loc2.minable.result = "fusion-locomotive-mk2"
-f_loc2.max_health = 1350
-f_loc2.max_speed = 1.8 
-f_loc2.max_power = "900kW"
-f_loc2.burner.fuel_inventory_size = 0
-f_loc2.reversing_power_modifier = 0.8
-f_loc2.braking_force = 15
-f_loc2.friction_force = 0.375
-f_loc2.air_resistance = 0.005625
+local locomotive_2_entity = table.deepcopy(data.raw['locomotive']['locomotive'])
+locomotive_2_entity.name = "fusion-locomotive-2"
+locomotive_2_entity.minable.result = "fusion-locomotive-2"
+locomotive_2_entity.max_health = 1350
+locomotive_2_entity.max_speed = 1.8 
+locomotive_2_entity.max_power = "900kW"
+locomotive_2_entity.reversing_power_modifier = 0.8
+locomotive_2_entity.braking_force = 15
+locomotive_2_entity.friction_force = 0.375
+locomotive_2_entity.air_resistance = 0.005625
+locomotive_2_entity.burner = nil
+locomotive_2_entity.energy_source = {type = "void"}
 				
-local f_loc3 = table.deepcopy(data.raw['locomotive']['locomotive'])
-f_loc3.name = "fusion-locomotive-mk3"
-f_loc3.minable.result = "fusion-locomotive-mk3"
-f_loc3.max_health = 1700
-f_loc3.max_speed = 2.4
-f_loc3.max_power = "1200kW"
-f_loc3.burner.fuel_inventory_size = 0
-f_loc3.reversing_power_modifier = 1
-f_loc3.braking_force = 20
-f_loc3.friction_force = 0.25
-f_loc3.air_resistance = 0.00375
+local locomotive_3_entity = table.deepcopy(data.raw['locomotive']['locomotive'])
+locomotive_3_entity.name = "fusion-locomotive-3"
+locomotive_3_entity.minable.result = "fusion-locomotive-3"
+locomotive_3_entity.max_health = 1700
+locomotive_3_entity.max_speed = 2.4
+locomotive_3_entity.max_power = "1200kW"
+locomotive_3_entity.reversing_power_modifier = 1
+locomotive_3_entity.braking_force = 20
+locomotive_3_entity.friction_force = 0.25
+locomotive_3_entity.air_resistance = 0.00375
+locomotive_3_entity.burner = nil
+locomotive_3_entity.energy_source = {type = "void"}
 
 				
-data:extend({f_loc,f_loc2,f_loc3})
+data:extend({locomotive_1_entity,locomotive_2_entity,locomotive_3_entity})
 
 
-local floc = table.deepcopy(data.raw['item-with-entity-data']['locomotive'])
-floc.name = "fusion-locomotive-mk1"
-floc.order = "a[train-system]-f[diesel-locomotive]-a[fusion-train]-a[fusion-locomotive-mk1]"
-floc.place_result = "fusion-locomotive-mk1"
+local locomotive_1_item = table.deepcopy(data.raw['item-with-entity-data']['locomotive'])
+locomotive_1_item.name = "fusion-locomotive-1"
+locomotive_1_item.order = "a[train-system]-f[diesel-locomotive]-a[fusion-train]-a[fusion-locomotive-1]"
+locomotive_1_item.place_result = "fusion-locomotive-1"
 
-local floc2 = table.deepcopy(data.raw['item-with-entity-data']['locomotive'])
-floc2.name = "fusion-locomotive-mk2"
-floc2.order = "a[train-system]-f[diesel-locomotive]-a[fusion-train]-b[fusion-locomotive-mk2]"
-floc2.place_result = "fusion-locomotive-mk2"
+local locomotive_2_item = table.deepcopy(data.raw['item-with-entity-data']['locomotive'])
+locomotive_2_item.name = "fusion-locomotive-2"
+locomotive_2_item.order = "a[train-system]-f[diesel-locomotive]-a[fusion-train]-b[fusion-locomotive-2]"
+locomotive_2_item.place_result = "fusion-locomotive-2"
 
-local floc3 = table.deepcopy(data.raw['item-with-entity-data']['locomotive'])
-floc3.name = "fusion-locomotive-mk3"
-floc3.order = "a[train-system]-f[diesel-locomotive]-a[fusion-train]-c[fusion-locomotive-mk3]"
-floc3.place_result = "fusion-locomotive-mk3"
-
-
-data:extend({floc,floc2,floc3})
+local locomotive_3_item = table.deepcopy(data.raw['item-with-entity-data']['locomotive'])
+locomotive_3_item.name = "fusion-locomotive-3"
+locomotive_3_item.order = "a[train-system]-f[diesel-locomotive]-a[fusion-train]-c[fusion-locomotive-3]"
+locomotive_3_item.place_result = "fusion-locomotive-3"
 
 
-local eloc = table.deepcopy(data.raw['recipe']['locomotive'])
-eloc.name = "fusion-locomotive-mk1"
-eloc.ingredients =
+data:extend({locomotive_1_item,locomotive_2_item,locomotive_3_item})
+
+
+local locomotive_1_recipe = table.deepcopy(data.raw['recipe']['locomotive'])
+locomotive_1_recipe.name = "fusion-locomotive-1"
+locomotive_1_recipe.ingredients =
 	{
 		{"locomotive", 1},
 		{"nuclear-reactor", 1},
 		{"electric-engine-unit", 20},
 		{"used-up-uranium-fuel-cell", 20}	
 	}
-eloc.result = "fusion-locomotive-mk1"
+locomotive_1_recipe.result = "fusion-locomotive-1"
 
-local eloc2 = table.deepcopy(data.raw['recipe']['locomotive'])
-eloc2.name = "fusion-locomotive-mk2"
-eloc2.ingredients =
+local locomotive_2_recipe = table.deepcopy(data.raw['recipe']['locomotive'])
+locomotive_2_recipe.name = "fusion-locomotive-2"
+locomotive_2_recipe.ingredients =
 	{
-		{"fusion-locomotive-mk1", 1},
+		{"fusion-locomotive-1", 1},
 		{"nuclear-reactor", 1},
 		{"electric-engine-unit", 20},
 		{"used-up-uranium-fuel-cell", 20}
 	}
-eloc2.result = "fusion-locomotive-mk2"
+locomotive_2_recipe.result = "fusion-locomotive-2"
 
-local eloc3 = table.deepcopy(data.raw['recipe']['locomotive'])
-eloc3.name = "fusion-locomotive-mk3"
-eloc3.ingredients =
+local locomotive_3_recipe = table.deepcopy(data.raw['recipe']['locomotive'])
+locomotive_3_recipe.name = "fusion-locomotive-3"
+locomotive_3_recipe.ingredients =
 	{
-		{"fusion-locomotive-mk2", 1},
+		{"fusion-locomotive-2", 1},
 		{"nuclear-reactor", 1},
 		{"electric-engine-unit", 20},
 		{"used-up-uranium-fuel-cell", 20}
 	}
-eloc3.result = "fusion-locomotive-mk3"
+locomotive_3_recipe.result = "fusion-locomotive-3"
 
 
-data:extend({eloc})
+data:extend({locomotive_1_recipe})
 function train_rec()
-	data:extend({eloc2,eloc3})
+	data:extend({locomotive_2_recipe,locomotive_3_recipe})
 end
 
 
@@ -101,7 +104,7 @@ data:extend(
 		{
 			{
 				type = "unlock-recipe",
-				recipe = "fusion-locomotive-mk1"
+				recipe = "fusion-locomotive-1"
 			}		
 		},
 		prerequisites = {"production-science-pack", "utility-science-pack", "nuclear-power"},
@@ -134,7 +137,7 @@ function train_tech()
 			{
 				{
 					type = "unlock-recipe",
-					recipe = "fusion-locomotive-mk2"
+					recipe = "fusion-locomotive-2"
 				}		
 			},
 			prerequisites = {"fusion-railway"},
@@ -162,7 +165,7 @@ function train_tech()
 			{
 				{
 					type = "unlock-recipe",
-					recipe = "fusion-locomotive-mk3"
+					recipe = "fusion-locomotive-3"
 				}		
 			},
 			prerequisites = {"fusion-railway-2"},
