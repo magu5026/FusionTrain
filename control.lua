@@ -1,73 +1,57 @@
 require("lib")
-local MODNAME = "FusionTrain"
-
 
 function ON_INIT()
-	global.FusionTrain = global.FusionTrain or {}
-	global.FusionTrain.TrainList = global.FusionTrain.TrainList or {}
+	global = {}
+	global.TrainList = {}
+	global.Fuel = game.item_prototypes['nuclear-fuel']
+	global.MODNAME = "FusionTrain"
 end
 
 function ON_CONFIGURATION_CHANGED(data)
-	ON_INIT()
 	if NeedMigration(data,MODNAME) then
 		local old_version = GetOldVersion(data,MODNAME)
-		if old_version < "00.16.01" then
-			global.FusionTrain.TrainList = {}
+		if old_version < "00.17.01" then
+			ON_INIT()
 			local all_trains = game.surfaces[1].find_entities_filtered{type="locomotive"}			
 			for _,train in pairs(all_trains) do
 				if train.name:find("fusion-locomotive-mk",1,true) then
-					table.insert(global.FusionTrain.TrainList,train) 
+					train.burner.currently_burning = global.Fuel
+					train.burner.remaining_burning_fuel = global.Fuel.fuel_value
+					table.insert(global.TrainList,train) 
 				end
 			end	
 		end
 	end
 end	
 
-function ON_TICK(event)
-	if #global.FusionTrain.TrainList > 0 then
-		for _,train in pairs(global.FusionTrain.TrainList) do
-			train.energy = train.prototype.max_energy_usage + 1	
+function ON_NTH_TICK(event)
+	if #global.TrainList > 0 then
+		for i,train in pairs(global.TrainList) do
+			if train and train.valid then
+				train.burner.remaining_burning_fuel = global.Fuel.fuel_value
+			else
+				table.remove(global.TrainList,i)
+			end
 		end
 	end
 end
 
 function ON_BUILT(event)
-	local entity = event.created_entity
-	if entity.type == "locomotive" then
-		if entity.name:find("fusion-locomotive-mk",1,true) then
-			table.insert(global.FusionTrain.TrainList,entity)
-		end
-	end
-end
-
-function ON_REMOVE(event)
-	local entity = event.entity
-	if entity.type == "locomotive" then
-		if entity.name:find("fusion-locomotive-mk",1,true) then 
-			Remove(global.FusionTrain.TrainList,entity)
-		end
-	end
-end
-
-function SCRIPT_RAISED_BUILT(event)
 	if event.created_entity and event.created_entity.valid then
-		ON_BUILT(event)
+		local entity = event.created_entity
+		if entity.type == "locomotive" and entity.name:find("fusion-locomotive-mk",1,true) then
+			entity.burner.currently_burning = global.Fuel
+			entity.burner.remaining_burning_fuel = global.Fuel.fuel_value
+			table.insert(global.TrainList,entity)
+		end
 	end
 end
 
-function SCRIPT_RAISED_DESTROY(event)
-	if event.entity and event.entity.valid then
-		ON_REMOVE(event)
-    end
-end 
 
 
 
 
 script.on_init(ON_INIT)
 script.on_configuration_changed(ON_CONFIGURATION_CHANGED)
-script.on_event(defines.events.on_tick,ON_TICK)
-script.on_event({defines.events.on_built_entity,defines.events.on_robot_built_entity},ON_BUILT)
-script.on_event({defines.events.on_pre_player_mined_item,defines.events.on_robot_pre_mined,defines.events.on_entity_died},ON_REMOVE)
-script.on_event(defines.events.script_raised_built,SCRIPT_RAISED_BUILT)
-script.on_event(defines.events.script_raised_destroy,SCRIPT_RAISED_DESTROY)
+script.on_nth_tick(60,ON_NTH_TICK)
+script.on_event({defines.events.on_built_entity,defines.events.on_robot_built_entity,defines.events.script_raised_built},ON_BUILT)

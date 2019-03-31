@@ -1,0 +1,26 @@
+---------------------------------------------------------------------------------------------------
+Version: 0.17.1
+Date: 10. 03. 2019
+  Major Features:
+    - Release 0.17.
+  Minor Features:
+    - Fuel bar is now filled.
+---------------------------------------------------------------------------------------------------
+Version: 0.16.2
+Date: 02. 07. 2018
+  Changes:
+    - Pull request by "shanemadden". Listen for script_raised_built and script_raised_destroy events.
+---------------------------------------------------------------------------------------------------
+Version: 0.16.1
+  Major Features:
+    - Release 0.16.
+---------------------------------------------------------------------------------------------------
+Version: 0.15.1
+  Minor Features:
+    - Adding setting page.
+    - Adding 2 higher levels of fusion trains.
+---------------------------------------------------------------------------------------------------
+Version: 0.15.0 - First public release
+  Major Features:
+    - Release 0.15.
+    - Adding a fusion train, that doesn't require fuel.
