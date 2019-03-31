@@ -1,5 +1,10 @@
 ---------------------------------------------------------------------------------------------------
-Version: 0.17.3
+Version: 0.17.5
+Date: 2019-03-30
+  Bugfixes:
+    - A typo in the changelog has been fixed
+---------------------------------------------------------------------------------------------------
+Version: 0.17.4
 Date: 2019-03-27
   Bugfixes:
     - Fixed a mistake. https://mods.factorio.com/mod/FusionTrain/discussion/5c9c7514bc6a7d000d35189d
