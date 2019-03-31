@@ -4,12 +4,12 @@ function ON_INIT()
 	global = {}
 	global.TrainList = {}
 	global.Fuel = game.item_prototypes['nuclear-fuel']
-	global.MODNAME = "FusionTrain"
 end
 
 function ON_CONFIGURATION_CHANGED(data)
-	if NeedMigration(data,MODNAME) then
-		local old_version = GetOldVersion(data,MODNAME)
+	local mod_name = "FusionTrain"
+	if NeedMigration(data,mod_name) then
+		local old_version = GetOldVersion(data,mod_name)
 		if old_version < "00.17.01" then
 			ON_INIT()
 			local all_trains = game.surfaces[1].find_entities_filtered{type="locomotive"}			
